@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import exceptions.InaccurateSpotDataException;
+import exceptions.SpotNotAvailableException;
+
 public class ParkingLot {
 
     private List<ParkingSpot> spots;
@@ -25,8 +28,8 @@ public class ParkingLot {
         Optional<ParkingSpot> spotOpt = spots.parallelStream()
                 .filter(s -> s.isAvailable() && canFit(vehicle, s))
                 .findFirst();
-
-        if (spotOpt.isPresent()) {
+        try {
+             if (spotOpt.isPresent()) {
             ParkingSpot spot = spotOpt.get();
             synchronized (spot) { // only one thread can assign this spot at a time
                 if (spot.isAvailable()) { // double-check inside synchronized
@@ -36,12 +39,13 @@ public class ParkingLot {
                             " parked at spot " + spot.getId());
                 }
             }
-        } else {
-            // overflow and size mismatch.
-            System.out.println("No available parking spot for vehicle "
-                    + vehicle.getPlate());
+        } 
+        throw new SpotNotAvailableException("No available parking spot for vehicle "+ vehicle.getPlate());
+ 
+        } catch (SpotNotAvailableException e) {
+            System.err.println(e.getMessage());
         }
-
+    
     }
 
     // Release a parking spot
@@ -51,7 +55,8 @@ public class ParkingLot {
             System.out.println("Invalid plate number.");
             return;
         }
-
+        try {
+            InaccurateSpotDataException.SpotDataValidation(plateNumber);
         for (ParkingSpot spot : spots) {
             if (!spot.isAvailable()
                     && spot.getCurrentVehicle().getPlate().equals(plateNumber)) {
@@ -64,8 +69,14 @@ public class ParkingLot {
                 return;
             }
         }
-
         System.out.println("Vehicle not found in parking lot.");
+            
+        } catch (InaccurateSpotDataException e) {
+            System.out.println(e.getMessage());
+        }
+       
+  
+
     }
 
     // Size compatibility check
