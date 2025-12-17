@@ -40,9 +40,10 @@ public class ParkingLot {
                 }
             }
         } 
+        
         throw new SpotNotAvailableException("No available parking spot for vehicle "+ vehicle.getPlate());
- 
-        } catch (SpotNotAvailableException e) {
+        } 
+        catch (SpotNotAvailableException e) {
             System.err.println(e.getMessage());
         }
     

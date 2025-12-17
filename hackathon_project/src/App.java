@@ -32,6 +32,7 @@ public class App {
 
         // Release a spot
         parkingLot.releaseSpot("ABC123");
+        parkingLot.releaseSpot("1");
 
         System.out.println();
 
