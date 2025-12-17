@@ -99,6 +99,7 @@ And lastly, most of our team members were comfortable coding in Java.
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+
 ## Parallel programming + exception handling + future improvements
 ## Parralel Programming
 We used Java Parallel Streams to search for an available parking spot:
