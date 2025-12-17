@@ -29,23 +29,25 @@ public class ParkingLot {
                 .filter(s -> s.isAvailable() && canFit(vehicle, s))
                 .findFirst();
         try {
-             if (spotOpt.isPresent()) {
-            ParkingSpot spot = spotOpt.get();
-            synchronized (spot) { // only one thread can assign this spot at a time
-                if (spot.isAvailable()) { // double-check inside synchronized
-                    spot.setCurrentVehicle(vehicle);
-                    spot.setAvailable(false);
-                    System.out.println("Vehicle " + vehicle.getPlate() +
-                            " parked at spot " + spot.getId());
+            if (spotOpt.isPresent()) {
+                ParkingSpot spot = spotOpt.get();
+                synchronized (spot) { // only one thread can assign this spot at a time
+                    if (spot.isAvailable()) { // double-check inside synchronized
+                        spot.setCurrentVehicle(vehicle);
+                        spot.setAvailable(false);
+                        System.out.println("Vehicle " + vehicle.getPlate() +
+                                " parked at spot " + spot.getId());
+                    }
                 }
+            } else {
+                throw new SpotNotAvailableException("No available parking spot for vehicle " + vehicle.getPlate());
+
             }
-        } 
-        throw new SpotNotAvailableException("No available parking spot for vehicle "+ vehicle.getPlate());
- 
+
         } catch (SpotNotAvailableException e) {
             System.err.println(e.getMessage());
         }
-    
+
     }
 
     // Release a parking spot
@@ -57,25 +59,23 @@ public class ParkingLot {
         }
         try {
             InaccurateSpotDataException.SpotDataValidation(plateNumber);
-        for (ParkingSpot spot : spots) {
-            if (!spot.isAvailable()
-                    && spot.getCurrentVehicle().getPlate().equals(plateNumber)) {
+            for (ParkingSpot spot : spots) {
+                if (!spot.isAvailable()
+                        && spot.getCurrentVehicle().getPlate().equals(plateNumber)) {
 
-                spot.setCurrentVehicle(null);
-                spot.setAvailable(true);
+                    spot.setCurrentVehicle(null);
+                    spot.setAvailable(true);
 
-                System.out.println("Vehicle " + plateNumber
-                        + " left spot " + spot.getId());
-                return;
+                    System.out.println("Vehicle " + plateNumber
+                            + " left spot " + spot.getId());
+                    return;
+                }
             }
-        }
-        System.out.println("Vehicle not found in parking lot.");
-            
+            System.out.println("Vehicle not found in parking lot.");
+
         } catch (InaccurateSpotDataException e) {
             System.out.println(e.getMessage());
         }
-       
-  
 
     }
 
