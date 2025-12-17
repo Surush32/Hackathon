@@ -29,6 +29,7 @@ public class ParkingLot {
                 .filter(s -> s.isAvailable() && canFit(vehicle, s))
                 .findFirst();
         try {
+            // SpotNotAvailableException.SpotAvailabilityValidation(spotOpt.isPresent());
             if (spotOpt.isPresent()) {
                 ParkingSpot spot = spotOpt.get();
                 synchronized (spot) { // only one thread can assign this spot at a time
@@ -39,7 +40,8 @@ public class ParkingLot {
                                 " parked at spot " + spot.getId());
                     }
                 }
-            } else {
+            } 
+            else {
                 throw new SpotNotAvailableException("No available parking spot for vehicle " + vehicle.getPlate());
 
             }

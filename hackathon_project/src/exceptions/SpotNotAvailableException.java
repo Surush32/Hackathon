@@ -4,12 +4,4 @@ public class SpotNotAvailableException extends ParkingException {
         super(message);
     }
 
-    public static void SpotAvailabilityValidation(boolean isAvailable)
-        throws SpotNotAvailableException {
-
-    if (!isAvailable) {
-        throw new SpotNotAvailableException(
-                "The requested spot is not available.");
-    }
-}
 }
