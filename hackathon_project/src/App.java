@@ -15,6 +15,7 @@ public class App {
         ParkingLot parkingLot = new ParkingLot(spots);
 
         // Create vehicles
+        Vehicle v6 = new Vehicle("VZ9#9", "small");
         Vehicle v1 = new Vehicle("ABC123", "compact");
         Vehicle v2 = new Vehicle("XYZ789", "large");
         Vehicle v3 = new Vehicle("LMNO999", "large"); // overflow test
@@ -27,6 +28,7 @@ public class App {
         parkingLot.assignSpot(v3); // size mismatch test
         parkingLot.assignSpot(v4);
         parkingLot.assignSpot(v5); // triggering overflow
+        parkingLot.assignSpot(v6); // invalid plate test
         parkingLot.assignSpot(v1); // already parked test
         System.out.println();
 

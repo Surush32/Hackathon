@@ -1,3 +1,5 @@
+import exceptions.InaccurateSpotDataException;
+
 public class ParkingSpot {
     private String id;         
     private String size;          

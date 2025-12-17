@@ -1,3 +1,4 @@
+import exceptions.InaccurateVehicleDataException;
 
 public class Vehicle {
     private String plate; 
@@ -5,6 +6,12 @@ public class Vehicle {
 
     // Constructor
     public Vehicle(String plate, String size) {
+    try {
+        InaccurateVehicleDataException.VehicleDataValidation(plate);
+    }
+    catch (InaccurateVehicleDataException e) {
+        System.err.println(e.getMessage());
+    }   
         this.plate = plate;
         this.size = size;
     }
