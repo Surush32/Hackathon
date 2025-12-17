@@ -97,4 +97,17 @@ public class ParkingLot {
         return parkedCars;
     }
 
+    public void printStatus() {
+
+        // Print all parked vehicles
+        List<String> parkedCars = getParkedCars();
+        System.out.println("\nParked vehicles:");
+        if (parkedCars.isEmpty()) {
+            System.out.println("None");
+        } else {
+            for (String plate : parkedCars) {
+                System.out.println("- " + plate);
+            }
+        }
+    }
 }
