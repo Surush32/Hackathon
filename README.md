@@ -99,7 +99,45 @@ And lastly, most of our team members were comfortable coding in Java.
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
+## Parallel programming + exception handling + future improvements
+## Parralel Programming
+We used Java Parallel Streams to search for an available parking spot:
+
+```
+Optional<ParkingSpot> spotOpt = spots.parallelStream()
+        .filter(s -> s.isAvailable() && canFit(vehicle, s))
+        .findFirst();
+
+```
+Why parallel streams?
+
+Instead of looping through parking spots one by one,
+parallel streams allow the search to be split across multiple CPU cores
+
+This improves performance when the number of parking spots increases
+
+## Exception Handling
+
+The system uses custom exceptions to handle errors, such as:
+
+No available parking spot
+
+Invalid vehicle data
+
+Invalid spot data
+
+Parking overflow
+
+Try/catch blocks are used in the main logic to catch errors, show clear messages, and keep the program running without crashing.
+
+## Future Improvements
+Add a database to store parking information.
+Adding a frontend to our project.
+Adding a reservation system where customers can check before coming to the parking lot.
 ---
+
+## Parallel programming + exception handling + future improvements
+
 
 ## Instructions to Run the Program
 
