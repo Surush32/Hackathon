@@ -132,12 +132,11 @@ Parking overflow
 Try/catch blocks are used in the main logic to catch errors, show clear messages, and keep the program running without crashing.
 
 ## Future Improvements
-Add a database to store parking information.
-Adding a frontend to our project.
-Adding a reservation system where customers can check before coming to the parking lot.
+- Add a database to store parking information.
+- Adding a frontend to our project.
+- Adding a reservation system where customers can check before coming to the parking lot.
 ---
 
-## Parallel programming + exception handling + future improvements
 
 
 ## Instructions to Run the Program
